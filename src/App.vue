@@ -1,32 +1,39 @@
-<template>
-  <div id="app">
-    <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
-    </div>
-    <router-view/>
-  </div>
+<template lang='pug'>
+	.container
+		.jumbotron
+			h1 {{title}}
+			small.text-secondary
+				i.fa.fa-shopping-cart.mr-3
+				span {{subTitle}}
+		search-bar(v-on:@sumbit='onSubmit')
+		product-wrapper
+	
 </template>
 
-<style lang="scss">
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
+<script>
+import SearchBar from './components/SearchBar.vue'
+import ProductWrapper from './components/Product-wrapper.vue'
+
+export default {
+	data() {
+		return {
+			title:'쇼핑몰',
+			subTitle:'검색을 통해 상품을 검색하세요',
+			search: '',
+		}
+	},
+	components: {
+		'search-bar': SearchBar,
+		'product-wrapper': ProductWrapper,
+	},
+	methods: {
+		onSubmit(value) {
+			this.search = value;
+		}
+	}
 }
+</script>
 
-#nav {
-  padding: 30px;
+<style lang='scss' scoped>
 
-  a {
-    font-weight: bold;
-    color: #2c3e50;
-
-    &.router-link-exact-active {
-      color: #42b983;
-    }
-  }
-}
 </style>
